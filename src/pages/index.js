@@ -14,7 +14,7 @@ export const Pages = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/confirm/:numberQuestions" element={<Confirm />} />
-        <Route path="/question" element={<Question />} />
+        <Route path="/questions" element={<Question />} />
       </Routes>
     </BrowserRouter>
   );

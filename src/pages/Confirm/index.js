@@ -22,8 +22,10 @@ export const Confirm = () => {
 
   const handleStart = async () => {
     setDisabled(true);
+
     const response = await getQuestions(params.numberQuestions);
     setQuestions(response);
+
     navigate(`/questions`);
   };
 

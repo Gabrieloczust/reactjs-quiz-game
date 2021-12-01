@@ -10,11 +10,23 @@ export const QuestionsContext = createContext(DEFAULT_VALUE);
 export const QuestionsContentProvider = ({ children }) => {
   const [state, setState] = useState(DEFAULT_VALUE.state);
 
+  const setQuestions = (questions) => {
+    const formattedQuestions = questions.map(
+      ({ incorrect_answers, correct_answer, ...questionObject }) => ({
+        ...questionObject,
+        correct_answer,
+        answers: [...incorrect_answers, correct_answer].sort(),
+      })
+    );
+
+    setState(formattedQuestions);
+  };
+
   return (
     <QuestionsContext.Provider
       value={{
         questions: state,
-        setQuestions: setState,
+        setQuestions,
       }}
     >
       {children}

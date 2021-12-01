@@ -1,9 +1,14 @@
-import { Typography } from '@mui/material';
+import { SelectQuestions } from 'components'
+import * as Styles from './Home.styles'
 
 export const Home = () => {
   return (
-    <Typography variant="h1" component="div" gutterBottom>
-      Quiz Game
-    </Typography>
+    <Styles.Container>
+      <Styles.Title variant="h1" component="div" align="center">
+        Quiz Game
+      </Styles.Title>
+
+      <SelectQuestions />
+    </Styles.Container>
   )
 }

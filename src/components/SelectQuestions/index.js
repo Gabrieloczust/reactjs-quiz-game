@@ -1,14 +1,18 @@
-import { useState } from 'react';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import { useState } from "react";
+import PropTypes from "prop-types";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
-export const SelectQuestions = () => {
-  const [quetions, setQuestions] = useState('');
+import { questionsNumbers } from "data";
+
+export const SelectQuestions = ({ afterChange }) => {
+  const [quetions, setQuestions] = useState("");
 
   const handleChange = (event) => {
     setQuestions(event.target.value);
+    afterChange?.(event.target.value);
   };
 
   return (
@@ -22,10 +26,16 @@ export const SelectQuestions = () => {
         autoWidth
         label="Questions"
       >
-        <MenuItem value={3}>3</MenuItem>
-        <MenuItem value={5}>5</MenuItem>
-        <MenuItem value={10}>10</MenuItem>
+        {questionsNumbers.map((number) => (
+          <MenuItem value={number} key={number}>
+            {number}
+          </MenuItem>
+        ))}
       </Select>
     </FormControl>
   );
-}
+};
+
+SelectQuestions.propTypes = {
+  afterChange: PropTypes.func,
+};

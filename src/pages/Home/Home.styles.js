@@ -1,11 +1,13 @@
-import { Container as MaterialContainer, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
-
-export const Container = styled(MaterialContainer)(({ theme }) => ({
-  paddingTop: theme.spacing(5),
-  paddingBottom: theme.spacing(5),
-}));
+import { Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
 export const Title = styled(Typography)(({ theme }) => ({
-  marginBottom: theme.spacing(5),
+  marginBottom: theme.spacing(3),
+}));
+
+export const Description = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: theme.spacing(3),
 }));

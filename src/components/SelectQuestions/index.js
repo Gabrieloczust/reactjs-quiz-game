@@ -21,6 +21,7 @@ export const SelectQuestions = ({ afterChange }) => {
       <Select
         labelId="select-label-questions"
         id="select-questions"
+        data-testid="select-questions"
         value={quetions}
         onChange={handleChange}
         autoWidth

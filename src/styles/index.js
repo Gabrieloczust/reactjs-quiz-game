@@ -15,5 +15,5 @@ export const Container = styled("div")(({ theme, direction }) => ({
 
 export const BigButton = styled(Button)({
   padding: "1rem 3rem",
-  fontSize: "1.5rem",
+  fontSize: "1rem",
 });

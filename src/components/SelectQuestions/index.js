@@ -17,7 +17,13 @@ export const SelectQuestions = ({ afterChange }) => {
 
   return (
     <FormControl sx={{ minWidth: 125 }}>
-      <InputLabel id="select-label-questions">Questions</InputLabel>
+      <InputLabel
+        id="select-label-questions"
+        data-testid="select-label-questions"
+      >
+        Questions
+      </InputLabel>
+
       <Select
         labelId="select-label-questions"
         id="select-questions"

@@ -18,11 +18,35 @@ import * as GlobalStyles from "styles";
 export const Question = () => {
   const navigate = useNavigate();
   const { questions } = useQuestionsContext();
+
   const [activeStep, setActiveStep] = useState(0);
+  const [totalHits, setTotalHits] = useState(0);
+  const [answers, setAnswers] = useState(
+    questions.map(({ question, correct_answer }) => ({
+      question,
+      answer: "",
+      correct_answer,
+    }))
+  );
 
   const isFinished = activeStep === questions.length;
   const isLastQuestion = activeStep === questions.length - 1;
   const activeQuestion = questions[activeStep];
+
+  const handleChangeAnswer = (event) => {
+    setAnswers(
+      answers.map((answer, index) => {
+        if (index === activeStep) {
+          return {
+            ...answer,
+            answer: event.target.value,
+          };
+        }
+
+        return answer;
+      })
+    );
+  };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -34,6 +58,13 @@ export const Question = () => {
 
   const handleFinish = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+
+    const countCorrectAnswers = answers.reduce((acc, question) => {
+      return (acc += Number(question.answer === question.correct_answer));
+    }, 0);
+
+    setTotalHits(countCorrectAnswers);
+    console.log({ answers, countCorrectAnswers });
   };
 
   useEffect(() => {
@@ -55,9 +86,17 @@ export const Question = () => {
       </Stepper>
 
       {isFinished ? (
-        <Typography sx={{ mt: 2, mb: 1 }}>
-          All questions completed - you&apos;re finished
-        </Typography>
+        <>
+          <Typography sx={{ mt: 2 }}>
+            All questions completed - you&apos;re finished
+          </Typography>
+
+          <Typography>
+            You got {totalHits} {totalHits > 1 ? "questions" : "question"} right
+            and {questions.length - totalHits}{" "}
+            {questions.length - totalHits > 1 ? "questions" : "question"} wrong.
+          </Typography>
+        </>
       ) : (
         <>
           <Box
@@ -73,7 +112,8 @@ export const Question = () => {
             <FormControl component="fieldset">
               <RadioGroup
                 name={activeQuestion.question}
-                // value=""
+                value={answers[activeStep].answer}
+                onChange={handleChangeAnswer}
               >
                 {activeQuestion.answers.map((answer) => (
                   <FormControlLabel

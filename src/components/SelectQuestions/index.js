@@ -1,9 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import { InputLabel, MenuItem, FormControl, Select } from "@mui/material";
 
 import { questionsNumbers } from "data";
 

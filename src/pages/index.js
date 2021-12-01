@@ -6,7 +6,7 @@ import {
 
 import { Home } from './Home'
 import { Confirm } from './Confirm'
-import { Question } from './Question'
+import { Questions } from './Questions'
 
 export const Pages = () => {
   return (
@@ -14,7 +14,7 @@ export const Pages = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/confirm/:numberQuestions" element={<Confirm />} />
-        <Route path="/questions" element={<Question />} />
+        <Route path="/questions" element={<Questions />} />
       </Routes>
     </BrowserRouter>
   );

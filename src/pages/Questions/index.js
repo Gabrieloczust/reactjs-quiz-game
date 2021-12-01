@@ -1,21 +1,20 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Box from "@mui/material/Box";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
+import {
+  Box,
+  Stepper,
+  Step,
+  StepLabel,
+  Button,
+  Typography,
+} from "@mui/material";
 
 import { useQuestionsContext } from "contexts";
+import { FormQuestions, ReportAnswers } from "components";
 import * as GlobalStyles from "styles";
 
-export const Question = () => {
+export const Questions = () => {
   const navigate = useNavigate();
   const { questions } = useQuestionsContext();
 
@@ -24,7 +23,7 @@ export const Question = () => {
   const [answers, setAnswers] = useState(
     questions.map(({ question, correct_answer }) => ({
       question,
-      answer: "",
+      answer: null,
       correct_answer,
     }))
   );
@@ -32,6 +31,7 @@ export const Question = () => {
   const isFinished = activeStep === questions.length;
   const isLastQuestion = activeStep === questions.length - 1;
   const activeQuestion = questions[activeStep];
+  const totalErros = questions.length - totalHits;
 
   const handleChangeAnswer = (event) => {
     setAnswers(
@@ -86,17 +86,11 @@ export const Question = () => {
       </Stepper>
 
       {isFinished ? (
-        <>
-          <Typography sx={{ mt: 2 }}>
-            All questions completed - you&apos;re finished
-          </Typography>
-
-          <Typography>
-            You got {totalHits} {totalHits > 1 ? "questions" : "question"} right
-            and {questions.length - totalHits}{" "}
-            {questions.length - totalHits > 1 ? "questions" : "question"} wrong.
-          </Typography>
-        </>
+        <ReportAnswers
+          answers={answers}
+          totalHits={totalHits}
+          totalErros={totalErros}
+        />
       ) : (
         <>
           <Box
@@ -109,22 +103,12 @@ export const Question = () => {
               {activeQuestion.question}
             </Typography>
 
-            <FormControl component="fieldset">
-              <RadioGroup
-                name={activeQuestion.question}
-                value={answers[activeStep].answer}
-                onChange={handleChangeAnswer}
-              >
-                {activeQuestion.answers.map((answer) => (
-                  <FormControlLabel
-                    key={answer}
-                    control={<Radio />}
-                    label={answer}
-                    value={answer}
-                  />
-                ))}
-              </RadioGroup>
-            </FormControl>
+            <FormQuestions
+              name={activeQuestion.question}
+              value={answers[activeStep].answer}
+              onChange={handleChangeAnswer}
+              answers={activeQuestion.answers}
+            />
           </Box>
 
           <Box
@@ -143,11 +127,20 @@ export const Question = () => {
             </Button>
 
             {isLastQuestion ? (
-              <Button onClick={handleFinish} color="success">
+              <Button
+                onClick={handleFinish}
+                disabled={!answers[activeStep].answer}
+                color="success"
+              >
                 Finish
               </Button>
             ) : (
-              <Button onClick={handleNext}>Next</Button>
+              <Button
+                onClick={handleNext}
+                disabled={!answers[activeStep].answer}
+              >
+                Next
+              </Button>
             )}
           </Box>
         </>

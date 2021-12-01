@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import { Question } from ".";
+import { Questions } from ".";
 
-describe("<Question />", () => {
+describe("<Questions />", () => {
   describe("smoke tests", () => {
     it("should render component", () => {
       const { container } = createComponent();
@@ -14,7 +14,7 @@ describe("<Question />", () => {
 const createComponent = () => {
   return render(
     <BrowserRouter>
-      <Question />
+      <Questions />
     </BrowserRouter>
   );
 };

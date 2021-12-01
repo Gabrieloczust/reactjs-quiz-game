@@ -1,5 +1,9 @@
+import { Typography } from '@mui/material';
+
 export const Home = () => {
   return (
-    <div>Home page</div>
+    <Typography variant="h1" component="div" gutterBottom>
+      Quiz Game
+    </Typography>
   )
 }

@@ -7,9 +7,10 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
+import Radio from "@material-ui/core/Radio";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormControl from "@material-ui/core/FormControl";
 
 import { useQuestionsContext } from "contexts";
 import * as GlobalStyles from "styles";
@@ -21,6 +22,7 @@ export const Question = () => {
 
   const isFinished = activeStep === questions.length;
   const isLastQuestion = activeStep === questions.length - 1;
+  const activeQuestion = questions[activeStep];
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -64,19 +66,25 @@ export const Question = () => {
               flexDirection: "column",
             }}
           >
-            <Typography sx={{ mt: 2, mb: 1 }}>
-              {questions[activeStep].question}
+            <Typography sx={{ mt: 2, mb: 1 }} fontWeight="bold">
+              {activeQuestion.question}
             </Typography>
 
-            <FormGroup>
-              {questions[activeStep].answers.map((answer) => (
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label={answer}
-                  key={answer}
-                />
-              ))}
-            </FormGroup>
+            <FormControl component="fieldset">
+              <RadioGroup
+                name={activeQuestion.question}
+                // value=""
+              >
+                {activeQuestion.answers.map((answer) => (
+                  <FormControlLabel
+                    key={answer}
+                    control={<Radio />}
+                    label={answer}
+                    value={answer}
+                  />
+                ))}
+              </RadioGroup>
+            </FormControl>
           </Box>
 
           <Box

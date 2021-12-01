@@ -1,1 +1,1 @@
-export const questionsNumbers = [3, 5, 10];
+export const questionsNumbers = [2, 3, 4, 5];

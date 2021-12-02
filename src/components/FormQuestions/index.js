@@ -21,7 +21,7 @@ export const FormQuestions = ({ name, value, onChange, answers }) => {
 
 FormQuestions.propTypes = {
   name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   answers: PropTypes.array.isRequired,
 };

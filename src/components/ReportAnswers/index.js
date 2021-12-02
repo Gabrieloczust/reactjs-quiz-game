@@ -35,7 +35,10 @@ export const ReportAnswers = ({ answers, totalHits, totalErros }) => {
           >
             <Typography fontWeight="bold">{++index} -</Typography>
 
-            <Typography color="#444444">{answer.question}</Typography>
+            <Typography
+              color="#444444"
+              dangerouslySetInnerHTML={{ __html: answer.question }}
+            ></Typography>
           </Box>
 
           <Box

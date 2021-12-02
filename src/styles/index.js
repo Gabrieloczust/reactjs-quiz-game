@@ -8,7 +8,7 @@ export const Container = styled("div")(({ theme, direction }) => ({
   alignItems: "center",
   justifyContent: "center",
   width: "100%",
-  height: "100vh",
+  minHeight: "100vh",
   boxSizing: "border-box",
   gap: theme.spacing(2),
 }));

@@ -97,11 +97,14 @@ export const Questions = () => {
             sx={{
               display: "flex",
               flexDirection: "column",
+              maxWidth: "100%",
             }}
           >
-            <Typography sx={{ mt: 2, mb: 1 }} fontWeight="bold">
-              {activeQuestion.question}
-            </Typography>
+            <Typography
+              sx={{ mt: 2, mb: 1 }}
+              fontWeight="bold"
+              dangerouslySetInnerHTML={{ __html: activeQuestion.question }}
+            ></Typography>
 
             <FormQuestions
               name={activeQuestion.question}

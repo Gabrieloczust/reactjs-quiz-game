@@ -86,8 +86,8 @@ export const Questions = () => {
           <ReportAnswers answers={answers} />
 
           <Button
-            variant="outlined"
-            color="warning"
+            variant="contained"
+            color="primary"
             onClick={() => navigate(`/`)}
             sx={{ maxWidth: "150px", margin: "0 auto" }}
           >

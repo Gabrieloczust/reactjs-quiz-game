@@ -36,8 +36,8 @@ export const Confirm = () => {
       </GlobalStyles.BigButton>
 
       <GlobalStyles.BigButton
-        variant="outlined"
-        color="success"
+        variant="contained"
+        color="primary"
         size="large"
         disabled={disabled}
         onClick={handleStart}

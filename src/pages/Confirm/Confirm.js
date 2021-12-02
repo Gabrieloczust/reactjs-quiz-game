@@ -27,7 +27,6 @@ export const Confirm = () => {
     setQuestions(response);
 
     navigate(`/questions`);
-    localStorage.removeItem("answers");
   };
 
   return (

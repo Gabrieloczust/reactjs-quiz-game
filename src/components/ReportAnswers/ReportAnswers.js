@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { useNavigate } from "react-router-dom";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Check, Clear } from "@material-ui/icons";
 
 export const ReportAnswers = ({ answers }) => {
-  const navigate = useNavigate();
-
   const [totalHits, setTotalHits] = useState(0);
   const [totalErros, setTotalErros] = useState(0);
 
@@ -26,10 +23,6 @@ export const ReportAnswers = ({ answers }) => {
         flexDirection: "column",
       }}
     >
-      <Typography sx={{ mt: 2 }} textAlign="center">
-        All questions completed - you&apos;re finished
-      </Typography>
-
       {answers.map((answer, index) => (
         <Box
           key={answer.question}
@@ -90,15 +83,6 @@ export const ReportAnswers = ({ answers }) => {
         You got {totalHits} {totalHits > 1 ? "questions" : "question"} right and{" "}
         {totalErros} {totalErros > 1 ? "questions" : "question"} wrong.
       </Typography>
-
-      <Button
-        variant="outlined"
-        color="warning"
-        onClick={() => navigate(`/`)}
-        sx={{ maxWidth: "150px", margin: "0 auto" }}
-      >
-        New Game
-      </Button>
     </Box>
   );
 };

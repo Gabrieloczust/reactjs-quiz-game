@@ -78,7 +78,22 @@ export const Questions = () => {
       </Stepper>
 
       {isFinished ? (
-        <ReportAnswers answers={answers} />
+        <>
+          <Typography sx={{ mt: 2 }} textAlign="center">
+            All questions completed - you&apos;re finished
+          </Typography>
+
+          <ReportAnswers answers={answers} />
+
+          <Button
+            variant="outlined"
+            color="warning"
+            onClick={() => navigate(`/`)}
+            sx={{ maxWidth: "150px", margin: "0 auto" }}
+          >
+            New Game
+          </Button>
+        </>
       ) : (
         <>
           <Box

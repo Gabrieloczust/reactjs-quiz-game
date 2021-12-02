@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+
+import { Typography } from "@mui/material";
 import { SelectQuestions, DialogReportAnswers } from "components";
 
 import * as GlobalStyles from "styles";
@@ -24,9 +25,13 @@ export const Home = () => {
 
   return (
     <GlobalStyles.Container>
-      <Styles.Title variant="h1" gutterBottom component="div" align="center">
-        Quiz Game
-      </Styles.Title>
+      <Styles.Description>
+        <Styles.Title variant="h1" gutterBottom component="div" align="center">
+          Quiz Game
+        </Styles.Title>
+
+        <Styles.Icon />
+      </Styles.Description>
 
       <Styles.Description>
         <Typography variant="subtitle1" gutterBottom component="div">

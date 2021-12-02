@@ -56,12 +56,12 @@ export const ReportAnswers = ({ answers }) => {
 
             {isError && (
               <Box sx={{ display: "flex", gap: "0.5rem" }}>
-                <Typography color="green" fontSize="0.9rem" fontWeight="bold">
+                <Typography color="#326bc1" fontSize="0.9rem" fontWeight="bold">
                   Correct Answer:
                 </Typography>
 
                 <Typography
-                  color="green"
+                  color="#326bc1"
                   fontSize="0.9rem"
                   dangerouslySetInnerHTML={{ __html: answer.correct_answer }}
                 />

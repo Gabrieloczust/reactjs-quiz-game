@@ -1,10 +1,23 @@
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { Box, Typography, Button } from "@mui/material";
 import { Check, Clear } from "@material-ui/icons";
 
-export const ReportAnswers = ({ answers, totalHits, totalErros }) => {
+export const ReportAnswers = ({ answers }) => {
   const navigate = useNavigate();
+
+  const [totalHits, setTotalHits] = useState(0);
+  const [totalErros, setTotalErros] = useState(0);
+
+  useEffect(() => {
+    const hits = answers.reduce((acc, question) => {
+      return (acc += Number(question.answer === question.correct_answer));
+    }, 0);
+
+    setTotalHits(hits);
+    setTotalErros(answers.length - hits);
+  }, [answers]);
 
   return (
     <Box
@@ -94,6 +107,4 @@ ReportAnswers.propTypes = {
       correct_answer: PropTypes.string.isRequired,
     })
   ).isRequired,
-  totalHits: PropTypes.number.isRequired,
-  totalErros: PropTypes.number.isRequired,
 };

@@ -19,7 +19,6 @@ export const Questions = () => {
   const { questions } = useQuestionsContext();
 
   const [activeStep, setActiveStep] = useState(0);
-  const [totalHits, setTotalHits] = useState(0);
   const [answers, setAnswers] = useState(
     questions.map(({ question, correct_answer }) => ({
       question,
@@ -31,7 +30,6 @@ export const Questions = () => {
   const isFinished = activeStep === questions.length;
   const isLastQuestion = activeStep === questions.length - 1;
   const activeQuestion = questions[activeStep];
-  const totalErros = questions.length - totalHits;
 
   const handleChangeAnswer = (event) => {
     setAnswers(
@@ -57,14 +55,8 @@ export const Questions = () => {
   };
 
   const handleFinish = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-
-    const countCorrectAnswers = answers.reduce((acc, question) => {
-      return (acc += Number(question.answer === question.correct_answer));
-    }, 0);
-
-    setTotalHits(countCorrectAnswers);
-    console.log({ answers, countCorrectAnswers });
+    handleNext();
+    localStorage.setItem("answers", JSON.stringify(answers));
   };
 
   useEffect(() => {
@@ -86,11 +78,7 @@ export const Questions = () => {
       </Stepper>
 
       {isFinished ? (
-        <ReportAnswers
-          answers={answers}
-          totalHits={totalHits}
-          totalErros={totalErros}
-        />
+        <ReportAnswers answers={answers} />
       ) : (
         <>
           <Box

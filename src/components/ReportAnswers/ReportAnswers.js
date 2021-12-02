@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Box, Typography } from "@mui/material";
-import { Check, Clear } from "@material-ui/icons";
 
 export const ReportAnswers = ({ answers }) => {
   const [totalHits, setTotalHits] = useState(0);
@@ -23,63 +22,56 @@ export const ReportAnswers = ({ answers }) => {
         flexDirection: "column",
       }}
     >
-      {answers.map((answer, index) => (
-        <Box
-          key={answer.question}
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            marginTop: "1rem",
-          }}
-        >
+      {answers.map((answer, index) => {
+        const isError = answer.answer !== answer.correct_answer;
+        const color = isError ? "red" : "green";
+
+        return (
           <Box
-            sx={{
-              display: "flex",
-              gap: "0.5rem",
-              marginBottom: "0.5rem",
-            }}
+            key={answer.question}
+            sx={{ display: "flex", flexDirection: "column", mt: 3 }}
           >
-            <Typography fontWeight="bold">{++index} -</Typography>
+            <Box sx={{ display: "flex", gap: "0.5rem", mb: 1 }}>
+              <Typography fontWeight="bold">{`${++index})`}</Typography>
 
-            <Typography
-              color="#444444"
-              dangerouslySetInnerHTML={{ __html: answer.question }}
-            ></Typography>
-          </Box>
-
-          <Box
-            sx={{
-              display: "flex",
-              gap: "0.5rem",
-            }}
-          >
-            <Check fontSize="small" color="success" />
-            <Typography
-              color="green"
-              fontSize="0.9rem"
-              dangerouslySetInnerHTML={{ __html: answer.correct_answer }}
-            ></Typography>
-          </Box>
-
-          {answer.answer !== answer.correct_answer && (
-            <Box
-              sx={{
-                display: "flex",
-                gap: "0.5rem",
-              }}
-            >
-              <Clear fontSize="small" color="secondary" />
               <Typography
-                color="secondary"
-                fontSize="0.9rem"
-                dangerouslySetInnerHTML={{ __html: answer.answer }}
-              ></Typography>
+                color="#444"
+                dangerouslySetInnerHTML={{ __html: answer.question }}
+              />
             </Box>
-          )}
-        </Box>
-      ))}
 
-      <Typography sx={{ mt: 2, mb: 3 }} textAlign="center">
+            <Box sx={{ display: "flex", gap: "0.5rem" }}>
+              <Typography color={color} fontSize="0.9rem" fontWeight="bold">
+                Answer:
+              </Typography>
+
+              <Typography
+                color={color}
+                fontSize="0.9rem"
+                dangerouslySetInnerHTML={{
+                  __html: answer.answer,
+                }}
+              />
+            </Box>
+
+            {isError && (
+              <Box sx={{ display: "flex", gap: "0.5rem" }}>
+                <Typography color="green" fontSize="0.9rem" fontWeight="bold">
+                  Correct Answer:
+                </Typography>
+
+                <Typography
+                  color="green"
+                  fontSize="0.9rem"
+                  dangerouslySetInnerHTML={{ __html: answer.correct_answer }}
+                />
+              </Box>
+            )}
+          </Box>
+        );
+      })}
+
+      <Typography sx={{ mt: 5, mb: 3 }} textAlign="center" fontWeight="bold">
         You got {totalHits} {totalHits > 1 ? "questions" : "question"} right and{" "}
         {totalErros} {totalErros > 1 ? "questions" : "question"} wrong.
       </Typography>

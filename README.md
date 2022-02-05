@@ -1,4 +1,4 @@
-Demo: [quiz-game-gabrieloczust.vercel.app/](quiz-game-gabrieloczust.vercel.app/)
+Demo: [quiz-game-gabrieloczust.vercel.app/](https://quiz-game-gabrieloczust.vercel.app/)
 
 ## Available Scripts
 
